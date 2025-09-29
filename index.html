@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ei</title>
+  <style>
+    :root{
+      --dark-bg:#0f1724;
+      --dark-card:#0b1220;
+      --dark-text:#e6eef6;
+      --dark-muted:#98a0b0;
+      --light-bg:#f7f7f7;
+      --light-card:#ffffff;
+      --light-text:#111111;
+      --light-muted:#444444;
+      --accent:#e33e3e;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:28px;
+    }
+    .container{width:980px; max-width:95%; border-radius:14px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.6);}
+    .tabs{display:flex; gap:8px; margin-bottom:14px}
+    .tab-btn{background:transparent; border:1px solid rgba(0,0,0,.1); padding:10px 14px; border-radius:8px; cursor:pointer;}
+    .tab-btn.active{background:linear-gradient(90deg, rgba(227,62,62,.14), rgba(227,62,62,.06)); border-color:rgba(227,62,62,.6); box-shadow:0 4px 14px rgba(227,62,62,.08)}
+    .content{padding:14px; border-radius:10px; min-height:320px}
+
+  
+    .card{display:flex; gap:14px; align-items:flex-start}
+    .photos{display:flex; gap:8px; flex-direction:column}
+    .photos img{width:220px; height:140px; object-fit:cover; border-radius:8px; border:2px solid rgba(255,255,255,.04)}
+    .card-body{flex:1}
+    .card-title{font-size:22px; margin:0 0 8px 0}
+    .card-text{line-height:1.5}
+
+  
+    .secret-box{max-width:620px; margin:0 auto; display:flex; flex-direction:column; gap:12px; align-items:stretch}
+    .pw-row{display:flex; gap:8px}
+    input[type=password]{padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,.2); background:transparent; width:100%;}
+    button.primary{background:var(--accent); color:white; border:none; padding:10px 14px; border-radius:8px; cursor:pointer}
+    .hint{font-size:13px}
+    .secret-paragraph{margin:10px 0; line-height:1.6}
+    .secret-image{max-width:100%; border-radius:8px; border:2px solid rgba(0,0,0,.1)}
+
+   
+    @media(max-width:780px){
+      .card{flex-direction:column}
+      .photos{flex-direction:row; overflow:auto}
+      .photos img{width:45%; height:120px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="main-container" role="main">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
+      <h1 style="font-size:18px; margin:0">Vale foto da sua escolha (não vale ter camiseta)</h1>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="principal">Principal</button>
+      <button class="tab-btn" data-tab="secreta">Secreta</button>
+    </div>
+
+    <div class="content">
+      <section id="principal" class="tab-content" aria-labelledby="tab-principal">
+        <div class="card">
+          <div class="photos" aria-hidden="false">
+            <img src="eu2.jpg" alt="Foto 1">
+            <img src="eu3.jpg" alt="Foto 2">
+            <img src="eu4.jpg" alt="Foto 3">
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Isa Moranguinho, gostou? kkkkk</h2>
+            <p class="card-text">Olha, ficou meio basica essa parte, mas ela vai melhorar com o tempo kkkkkkkk, espero q goste, e alías, olha a parte secreta ta? e pede desculpas por ser tão princesa assim, tenho q me ajoelhar só pra poder ver seus olhos kkkkkk.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="secreta" class="tab-content" style="display:none" aria-hidden="true">
+        <div class="secret-box">
+          <div class="hint">Digite a senha para abrir a aba secreta.</div>
+          <div class="pw-row">
+            <input id="pw-input" type="password" placeholder="Senha aqui" aria-label="Senha">
+            <button id="pw-check" class="primary">Abrir</button>
+          </div>
+          <div id="pw-message" class="hint"></div>
+
+          <div id="secret-content" style="display:none; margin-top:6px">
+            <img src="eu.jpg" width="200px" alt="pra vc" class="secret-image">
+            <p class="secret-paragraph">Bommm, a gente se conheceu ontem kkkkkk, mas hj vc já sabe basicamente tudo de mim e eu to fazendo esse site pra você kkkkk<br> ent moranguinho, eu gostei muito de vc e quero te conhecer melhor, certo q talvez eu seja meio safado e goste de ser meio cruel as vezes kkkkkk, mas meu coração é bom e nunca vou te fazer mal, então, espero q goste daq kkkkkkk .</p>
+            <p class="secret-paragraph">Agora, você sabia que é linda? tipo, eu fiquei meio gamado assim kkkkkkk, seus olhos são cheios de vida e tem um brilho único, seu cabelo preto como a noite é lindo e chama minha atenção, resumindo, vc é linda kkkkkkk, eu acho e gostaria de ver toda hora kkkkkk. E mesmo ainda não tendo visto, eu tenho ctz q vc é uma garota sexy e bom ******* kkkkkkkk
+
+            </p>
+            <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px">
+              <button id="lock-btn" class="tab-btn">Fechar</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const container = document.getElementById('main-container');
+
+    function applyTheme(mode){
+      if(mode==='dark'){
+        container.style.background = 'var(--dark-card)';
+        container.style.color = 'var(--dark-text)';
+        document.body.style.background = 'var(--dark-bg)';
+      } else {
+        container.style.background = 'var(--light-card)';
+        container.style.color = 'var(--light-text)';
+        document.body.style.background = 'var(--light-bg)';
+      }
+    }
+
+    tabs.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        tabs.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.tab;
+        tabContents.forEach(c=>{
+          if(c.id===target){ c.style.display = ''; c.setAttribute('aria-hidden','false') } else { c.style.display='none'; c.setAttribute('aria-hidden','true') }
+        })
+        if(target==='secreta'){
+          document.getElementById('pw-input').focus();
+          applyTheme('light');
+        } else {
+          applyTheme('dark');
+        }
+      })
+    })
+    const SECRET = '110309';
+    const pwInput = document.getElementById('pw-input');
+    const pwCheck = document.getElementById('pw-check');
+    const pwMessage = document.getElementById('pw-message');
+    const secretContent = document.getElementById('secret-content');
+    const lockBtn = document.getElementById('lock-btn');
+
+    function openSecret(){
+      const v = pwInput.value.trim();
+      if(v === SECRET){
+        pwMessage.textContent = 'Senha correta — acesso liberado.';
+        secretContent.style.display = '';
+        pwInput.value = '';
+      } else {
+        pwMessage.textContent = 'Senha incorreta. Tente novamente.';
+        secretContent.style.display = 'none';
+      }
+    }
+
+    pwCheck.addEventListener('click', openSecret);
+    pwInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') openSecret(); });
+
+    lockBtn.addEventListener('click', ()=>{ secretContent.style.display='none'; pwMessage.textContent='Conteúdo ocultado.' })
+
+ 
+    document.querySelector('[data-tab="principal"]').addEventListener('click', ()=>{ secretContent.style.display='none'; pwMessage.textContent=''; })
+
+  
+    applyTheme('dark');
+
+  </script>
+</body>
+</html>
