@@ -27,7 +27,6 @@
     .tab-btn.active{background:linear-gradient(90deg, rgba(227,62,62,.14), rgba(227,62,62,.06)); border-color:rgba(227,62,62,.6); box-shadow:0 4px 14px rgba(227,62,62,.08)}
     .content{padding:14px; border-radius:10px; min-height:320px}
 
-  
     .card{display:flex; gap:14px; align-items:flex-start}
     .photos{display:flex; gap:8px; flex-direction:column}
     .photos img{width:220px; height:140px; object-fit:cover; border-radius:8px; border:2px solid rgba(255,255,255,.04)}
@@ -35,7 +34,6 @@
     .card-title{font-size:22px; margin:0 0 8px 0}
     .card-text{line-height:1.5}
 
-  
     .secret-box{max-width:620px; margin:0 auto; display:flex; flex-direction:column; gap:12px; align-items:stretch}
     .pw-row{display:flex; gap:8px}
     input[type=password]{padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,.2); background:transparent; width:100%;}
@@ -44,7 +42,6 @@
     .secret-paragraph{margin:10px 0; line-height:1.6}
     .secret-image{max-width:100%; border-radius:8px; border:2px solid rgba(0,0,0,.1)}
 
-   
     @media(max-width:780px){
       .card{flex-direction:column}
       .photos{flex-direction:row; overflow:auto}
@@ -64,31 +61,58 @@
     </div>
 
     <div class="content">
+      <!-- Aba principal -->
       <section id="principal" class="tab-content" aria-labelledby="tab-principal">
         <div class="card">
-          <div class="photos" aria-hidden="false">
+          <div class="photos">
             <img src="eu2.jpg" alt="Foto 1">
             <img src="eu3.jpg" alt="Foto 2">
             <img src="eu4.jpg" alt="Foto 3">
           </div>
           <div class="card-body">
             <h2 class="card-title">Isa Moranguinho, gostou? kkkkk</h2>
-            <p class="card-text">Olha, ficou meio basica essa parte, mas ela vai melhorar com o tempo kkkkkkkk, espero q goste, e alías, olha a parte secreta ta? e pede desculpas por ser tão princesa assim, tenho q me ajoelhar só pra poder ver seus olhos kkkkkk.</p>
-          </div>
-        </div> <p> Hoje, eu não pensei muito no que escrever kkkkk, eu ia te elogiar, mas não sei como elogiar alguém que me deixa sem palavras, certo q tbm sou meio bobo quando escrevo, mas realmente não sei o que te dizer. <br> Pra quando você ver isso aqui, usa a palavra "vale", q eu vou te mandar um áudio ja que n sou bom com textos kkkkkk. <br> Só pra finalizar o de hj, obrigado por me aturar e n sumir, eu gostei kkkkk.</p>
-            <p class="secret-paragraph">Agora, você sabia que é linda? tipo, eu fiquei meio gamado assim kkkkkkk, seus olhos são cheios de vida e tem um brilho único, seu cabelo preto como a noite é lindo e chama minha atenção, resumindo, vc é linda kkkkkkk, eu acho e gostaria de ver toda hora kkkkkk. E mesmo ainda não tendo visto, eu tenho ctz q vc é uma garota sexy e bom ******* kkkkkkkk
-
+            <p class="card-text">
+              Olha, ficou meio basica essa parte, mas ela vai melhorar com o tempo kkkkkkkk, 
+              espero q goste, e alías, olha a parte secreta ta? e pede desculpas por ser tão princesa assim,
+              tenho q me ajoelhar só pra poder ver seus olhos kkkkkk.
             </p>
+          </div>
+        </div>
+        <p>
+          Hoje, eu não pensei muito no que escrever kkkkk, eu ia te elogiar, mas não sei como elogiar alguém 
+          que me deixa sem palavras... <br>
+          Pra quando você ver isso aqui, usa a palavra "vale", q eu vou te mandar um áudio ja que n sou bom com textos kkkkkk.
+        </p>
+        <p>
+          Só pra finalizar o de hj, obrigado por me aturar e n sumir, eu gostei kkkkk.
+        </p>
+      </section>
+
+      <!-- Aba secreta -->
+      <section id="secreta" class="tab-content" style="display:none" aria-labelledby="tab-secreta">
+        <div class="secret-box">
+          <div class="pw-row">
+            <input type="password" id="pw-input" placeholder="Digite a senha">
+            <button id="pw-check" class="primary">Entrar</button>
+          </div>
+          <div id="pw-message" class="hint"></div>
+          <div id="secret-content" style="display:none">
+            <p class="secret-paragraph">
+              Agora, você sabia que é linda? tipo, eu fiquei meio gamado assim kkkkkkk, seus olhos são cheios de vida 
+              e tem um brilho único, seu cabelo preto como a noite é lindo e chama minha atenção, resumindo, vc é linda kkkkkk.
+            </p>
+            <p class="secret-paragraph">
+              Eu tenho ctz q vc é uma garota sexy e incrível, mesmo sem precisar provar nada. 
+              Você tem algo que realmente me prende e me faz querer estar sempre por perto kkkkk.
+            </p>
+            <img src="segredo.jpg" alt="Segredo" class="secret-image">
             <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px">
               <button id="lock-btn" class="tab-btn">Fechar</button>
             </div>
           </div>
-
         </div>
       </section>
-
     </div>
-
   </div>
 
   <script>
@@ -114,7 +138,8 @@
         btn.classList.add('active');
         const target = btn.dataset.tab;
         tabContents.forEach(c=>{
-          if(c.id===target){ c.style.display = ''; c.setAttribute('aria-hidden','false') } else { c.style.display='none'; c.setAttribute('aria-hidden','true') }
+          if(c.id===target){ c.style.display = ''; c.setAttribute('aria-hidden','false') } 
+          else { c.style.display='none'; c.setAttribute('aria-hidden','true') }
         })
         if(target==='secreta'){
           document.getElementById('pw-input').focus();
@@ -124,6 +149,7 @@
         }
       })
     })
+
     const SECRET = '110309';
     const pwInput = document.getElementById('pw-input');
     const pwCheck = document.getElementById('pw-check');
@@ -146,15 +172,17 @@
     pwCheck.addEventListener('click', openSecret);
     pwInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') openSecret(); });
 
-    lockBtn.addEventListener('click', ()=>{ secretContent.style.display='none'; pwMessage.textContent='Conteúdo ocultado.' })
+    lockBtn.addEventListener('click', ()=>{
+      secretContent.style.display='none'; 
+      pwMessage.textContent='Conteúdo ocultado.' 
+    })
 
- 
-    document.querySelector('[data-tab="principal"]').addEventListener('click', ()=>{ secretContent.style.display='none'; pwMessage.textContent=''; })
+    document.querySelector('[data-tab="principal"]').addEventListener('click', ()=>{
+      secretContent.style.display='none'; 
+      pwMessage.textContent='';
+    })
 
-  
     applyTheme('dark');
-
   </script>
 </body>
 </html>
-
